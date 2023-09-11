@@ -58,7 +58,7 @@ func (e *errorTrace) Unwrap() error {
 	return e.err
 }
 
-func New(msg string) error {
+func New(msg string) *errorTrace {
 	pc, file, line, _ := runtime.Caller(1)
 	fn := runtime.FuncForPC(pc)
 	return &errorTrace{
