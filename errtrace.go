@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+var (
+	CallerSkip int = 1
+)
+
 type errorTrace struct {
 	err  error
 	msg  string
@@ -71,7 +75,7 @@ func New(msg string) *errorTrace {
 }
 
 func Wrap(err error) error {
-	pc, file, line, _ := runtime.Caller(1)
+	pc, file, line, _ := runtime.Caller(CallerSkip)
 	fn := runtime.FuncForPC(pc)
 	return &errorTrace{
 		err:  err,
@@ -104,7 +108,7 @@ type wrapper struct {
 }
 
 func (w *wrapper) Wrap(err error) error {
-	pc, file, line, _ := runtime.Caller(1)
+	pc, file, line, _ := runtime.Caller(CallerSkip)
 	fn := runtime.FuncForPC(pc)
 	return &errorTrace{
 		err:  err,
