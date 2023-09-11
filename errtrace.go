@@ -45,7 +45,7 @@ func (e *errorTrace) Error() string {
 				}
 				s.WriteString(fmt.Sprintf("\t\t\t\tat %s:%d", errx.file, errx.line))
 			default:
-				s.WriteString(fmt.Sprintf("\t\t\toriginal message: %s", err.Error()))
+				s.WriteString(fmt.Sprintf("\t\t\toriginal message: \n\t\t\t%s", strings.TrimSpace(err.Error())))
 			}
 
 			s.WriteString("\n")
