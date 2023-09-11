@@ -63,7 +63,7 @@ func (e *errorTrace) Unwrap() error {
 }
 
 func New(msg string) *errorTrace {
-	pc, file, line, _ := runtime.Caller(1)
+	pc, file, line, _ := runtime.Caller(CallerSkip)
 	fn := runtime.FuncForPC(pc)
 	return &errorTrace{
 		err:  nil,
