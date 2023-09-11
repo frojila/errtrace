@@ -90,8 +90,12 @@ func Valid(err error) (isValid bool) {
 	return
 }
 
-func Message(msg string) *wrapper {
+func Message(msg string) Wrapper {
 	return &wrapper{message: msg}
+}
+
+type Wrapper interface {
+	Wrap(err error) error
 }
 
 type wrapper struct {
