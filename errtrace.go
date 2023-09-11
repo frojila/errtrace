@@ -108,7 +108,15 @@ type wrapper struct {
 }
 
 func (w *wrapper) Wrap(err error) error {
-	pc, file, line, _ := runtime.Caller(CallerSkip)
+	var skip int
+
+	if CallerSkip > 1 {
+		skip = CallerSkip - 1
+	} else {
+		skip = CallerSkip
+	}
+
+	pc, file, line, _ := runtime.Caller(skip)
 	fn := runtime.FuncForPC(pc)
 	return &errorTrace{
 		err:  err,
